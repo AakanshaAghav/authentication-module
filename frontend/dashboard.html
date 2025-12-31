@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script defer src="script.js"></script>
+</head>
+<body class="dashboard-body">
+
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="logo">
+                <i data-feather="layout"></i>
+                <span>AppLogo</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active"><i data-feather="home"></i> Dashboard</li>
+                <li><i data-feather="user"></i> Profile</li>
+                <li><i data-feather="settings"></i> Settings</li>
+            </ul>
+            <button class="logout-btn" onclick="logout()">
+                <i data-feather="log-out"></i> Logout
+            </button>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 id="welcomeMsg">Welcome back!</h1>
+                <div class="user-badge">
+                    <div class="avatar">U</div>
+                </div>
+            </header>
+
+            <section class="content-cards">
+                <div class="card status-card">
+                    <h3>Account Status</h3>
+                    <p id="dashboardMsg">Loading your data...</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Recent Activity</h3>
+                    <p class="empty-state">No recent activity found.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

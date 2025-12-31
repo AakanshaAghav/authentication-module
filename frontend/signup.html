@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account</title>
+    <link rel="stylesheet" href="signup.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="auth-wrapper">
+      <div class="auth-card">
+        <h2>Create Account</h2>
+        <p class="subtitle">Join us today! Please fill in your details.</p>
+
+        <div class="input-container">
+          <input
+            id="signupUsername"
+            type="text"
+            placeholder="Username"
+            required
+          />
+        </div>
+
+        <div class="input-container">
+          <input id="signupEmail" type="email" placeholder="Email" required />
+        </div>
+
+        <div class="input-container">
+          <input
+            id="signupPassword"
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <div class="eye-toggle" onclick="toggleSignupPassword()">
+            <i id="signup-eye-icon" data-feather="eye"></i>
+          </div>
+        </div>
+
+        <button class="main-button" onclick="signup()">Signup</button>
+
+        <p id="signupMsg"></p>
+
+        <p class="footer-link">
+          Already have an account? <a href="login.html">Go to Login</a>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function toggleSignupPassword() {
+        const passInput = document.getElementById("signupPassword");
+        const icon = document.getElementById("signup-eye-icon");
+        if (passInput.type === "password") {
+          passInput.type = "text";
+          icon.setAttribute("data-feather", "eye-off");
+        } else {
+          passInput.type = "password";
+          icon.setAttribute("data-feather", "eye");
+        }
+        feather.replace();
+      }
+      feather.replace();
+    </script>
+  </body>
+</html>
