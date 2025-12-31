@@ -28,7 +28,7 @@ async function signup() {
     }
 
     try {
-        const res = await fetch("http://localhost:5000/api/auth/signup", {
+        const res = await fetch(`${API_URL}/signup`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, email, password })
@@ -36,7 +36,7 @@ async function signup() {
 
         const data = await res.json();
 
-        signupMsg.innerText = data.message;
+        signupMsg.innerText = data.message || "Signup failed";
         signupMsg.style.color = res.status === 201 ? "green" : "red";
 
         if (res.status === 201) {
@@ -45,11 +45,10 @@ async function signup() {
             }, 1000);
         }
     } catch (error) {
-        signupMsg.innerText = "Signup failed. Check backend!";
+        signupMsg.innerText = error?.message || "Network or server error. Please try again.";
         signupMsg.style.color = "red";
     }
 }
-
 
 // LOGIN
 async function login() {
@@ -63,7 +62,7 @@ async function login() {
     }
 
     try {
-        const res = await fetch("http://localhost:5000/api/auth/login", {
+        const res = await fetch(`${API_URL}/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
@@ -71,7 +70,7 @@ async function login() {
 
         const data = await res.json();
 
-        loginMsg.innerText = data.message;
+        loginMsg.innerText = data.message || "Login failed";
         loginMsg.style.color = res.status === 200 ? "green" : "red";
 
         if (res.status === 200) {
@@ -81,16 +80,15 @@ async function login() {
             }, 1000);
         }
     } catch (error) {
-        loginMsg.innerText = "Login failed. Check backend!";
+        loginMsg.innerText = error?.message || "Network or server error. Please try again.";
         loginMsg.style.color = "red";
     }
 }
 
 // DASHBOARD
-
 function logout() {
-  localStorage.removeItem("token");
-  window.location.href = "login.html";
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
 }
 
 async function loadDashboard() {
@@ -102,7 +100,7 @@ async function loadDashboard() {
     }
 
     try {
-        const res = await fetch("http://localhost:5000/api/auth/dashboard", {
+        const res = await fetch(`${API_URL}/dashboard`, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -113,9 +111,17 @@ async function loadDashboard() {
             dashboardMsg.innerText = "Login successful!";
             dashboardMsg.style.color = "green";
         } else {
-            window.location.href = "login.html";
+            dashboardMsg.innerText = data.message || "Unauthorized access";
+            dashboardMsg.style.color = "red";
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1000);
         }
     } catch (error) {
-        window.location.href = "login.html";
+        dashboardMsg.innerText = error?.message || "Network error. Redirecting to login...";
+        dashboardMsg.style.color = "red";
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1000);
     }
 }
