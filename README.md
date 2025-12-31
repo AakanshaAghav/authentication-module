@@ -65,13 +65,6 @@ MONGO_URI=your_mongodb_connection_string
 SECRET_KEY=your_jwt_secret_key
 ```
 
-🔹 Example:
-```bash
-PORT=5000
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/authDB
-SECRET_KEY=mySuperSecretKey123
-```
-
 **▶️ Step 4: Start Backend Server**
 
 ```bash
